@@ -1,5 +1,5 @@
-truecrack (0.1-1) unstable; urgency=low
+truecrack (0.1-1kali0) kali; urgency=low
 
-  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+  * Initial release 
 
  -- Devon Kearns <dookie@kali.org>  Sun, 23 Dec 2012 12:29:22 -0700

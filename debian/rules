@@ -11,3 +11,6 @@
 
 %:
 	dh $@ 
+override_dh_auto_install:
+	dh_installdirs
+	install truecrack $(CURDIR)/debian/truecrack/usr/bin/

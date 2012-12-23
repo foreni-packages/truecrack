@@ -1,15 +1,20 @@
 Source: truecrack
-Section: unknown
+Section: utils
 Priority: extra
 Maintainer: Devon Kearns <dookie@kali.org>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.3
-Homepage: <insert the upstream URL, if relevant>
-#Vcs-Git: git://git.debian.org/collab-maint/truecrack.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/truecrack.git;a=summary
+Homepage: http://code.google.com/p/truecrack/
+Vcs-Git: ssh://git@git.kali.org/packages/truecrack.git
+Vcs-Browser: http://git.kali.org/gitweb/?p=packages/truecrack.git;a=summary
 
 Package: truecrack
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Description: Bruteforce password cracker for TrueCrypt volumes.
+ TrueCrack is a bruteforce password cracker for TrueCrypt 
+ (Copyrigth) volume.
+ It is optimazed with Nvidia Cuda technology. It works with 
+ PBKDF2 (defined in PKCS5 v2.0) based on RIPEMD160 Key 
+ derivation function and XTS block cipher mode of operation 
+ used for hard disk encryption based on AES.

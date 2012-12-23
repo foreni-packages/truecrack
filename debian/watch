@@ -1,0 +1,7 @@
+version=3
+
+# This is the right string but the download archive isn't named properly
+# by the author so uscan thinks there's always an update.
+# If upstream ever starts to name them properly, we can edit this to suit.
+
+# http://code.google.com/p/truecrack/downloads/list?can=1 .*/truecrack\.(?:zip|tgz|tbz2|txz|tar\.gz|tar\.bz2|tar\.xz)
