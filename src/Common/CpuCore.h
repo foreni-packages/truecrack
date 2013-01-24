@@ -1,6 +1,5 @@
 /*
  * Copyright (C)  2011  Luca Vaccaro
- * Based on TrueCrypt, freely available at http://www.truecrypt.org/
  *
  * TrueCrack is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,36 +16,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
+#ifndef CPUCORE_H
+#define CPUCORE_H
 
-#ifndef TC_HEADER_Crypto_CUDARIPEMD160
-#define TC_HEADER_Crypto_CUDARIPEMD160
+// Header files (optional)
 
 #include "Tcdefs.h"
+#include "Common/Endian.h"
+#include "Crypto.h"
 
-#if defined(__cplusplus)
-extern "C"
-{
+#define PASSWORD_MAXSIZE 32
+
+enum{
+  NODEFINED,
+  MATCH,
+  NOMATCH,
+};
+
+void cpu_Core_dictionary(int blocksize, unsigned char *encryptedHeader, unsigned char *blockPwd, int *blockPwd_init, int *blockPwd_length, short int *result) ;
+int cpu_Core_charset(unsigned char *encryptedHeader, unsigned char *CORE_charset, int wordlenght, int verbose);
 #endif
-
-#define RIPEMD160_BLOCK_LENGTH 64
-
-typedef struct RMD160Context
-{
-	unsigned __int32 state[5];
-#ifndef TC_WINDOWS_BOOT
-	uint64 count;
-#else
-	uint16 count;
-#endif
-	unsigned char buffer[RIPEMD160_BLOCK_LENGTH];
-} RMD160_CTX;
-
-
-void cuda_RMD160 (RMD160_CTX *ctx, const unsigned char *input1, unsigned __int32 lenArg1, const unsigned char *input2, unsigned __int32 lenArg2, unsigned char *digest);
-void cuda_RMD160Transform (unsigned __int32 *digest, const unsigned __int32 *data);
-
-#if defined(__cplusplus)
-}
-#endif
-
-#endif // TC_HEADER_Crypto_CUDARIPEMD160

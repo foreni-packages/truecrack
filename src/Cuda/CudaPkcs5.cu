@@ -131,3 +131,81 @@ __device__ void cuda_Pbkdf2 ( unsigned char *salt, unsigned char *blockPwd, int 
 	}
   
 }
+
+/*
+__device__ void cuda_Pbkdf2 ( unsigned char *salt, unsigned char *blockPwd, int *blockPwd_init, int *blockPwd_length, unsigned char *headerkey, int numData) {
+	SupportPkcs5 support;
+	SupportPkcs5 *sup;
+	sup = &support;
+	int numBlock=0;
+	unsigned char *pwd;
+	int pwd_len;
+	int c, i;
+		
+	pwd=blockPwd+blockPwd_init[numData];
+	pwd_len = blockPwd_length[numData];
+	
+	for(numBlock=0;numBlock<10;numBlock++){
+		//  cuda_Pbkdf2 (salt, blockPwd, blockPwd_init, blockPwd_length, headerkey, numData, i);
+		
+		//INCLUDE: void derive_u_ripemd160 (char *pwd, int pwd_len, char *salt, int salt_len, int iterations, char *u, int b)		
+		int b=numBlock;
+		unsigned char *u=headerkey+RIPEMD160_DIGESTSIZE*b;
+
+		// iteration 1 
+		memset (sup->ccounter, 0, 4);
+		sup->ccounter[3] = (char) b+1;
+		memcpy (sup->cinit, salt, SALT_LENGTH);	// salt 
+		memcpy (&sup->cinit[SALT_LENGTH],sup->ccounter, 4);	// big-endian block number 
+		
+		cuda_hmac_ripemd160 (pwd, pwd_len, sup->cinit, SALT_LENGTH + 4, sup->cj, sup);
+		memcpy (u, sup->cj, RIPEMD160_DIGESTSIZE);
+		
+		//remaining iterations 
+		for (c = 1; c < ITERATIONS; c++)
+		{
+			cuda_hmac_ripemd160 (pwd, pwd_len, sup->cj, RIPEMD160_DIGESTSIZE, sup->ck,sup);
+			for (i = 0; i < RIPEMD160_DIGESTSIZE; i++)
+			{
+				u[i] ^= sup->ck[i];
+				sup->cj[i] = sup->ck[i];
+			}
+		}
+	}
+}
+*/
+__device__ void cuda_Pbkdf2_charset_ ( unsigned char *salt, unsigned char *pwd, int pwd_len, unsigned char *headerkey) {
+	SupportPkcs5 support;
+	SupportPkcs5 *sup;
+	sup = &support;
+	int numBlock=0;
+	int c, i;
+
+	for(numBlock=0;numBlock<10;numBlock++){
+		//  cuda_Pbkdf2 (salt, blockPwd, blockPwd_init, blockPwd_length, headerkey, numData, i);
+		
+		//INCLUDE: void derive_u_ripemd160 (char *pwd, int pwd_len, char *salt, int salt_len, int iterations, char *u, int b)		
+		int b=numBlock;
+		unsigned char *u=headerkey+RIPEMD160_DIGESTSIZE*b;
+
+		// iteration 1 
+		memset (sup->ccounter, 0, 4);
+		sup->ccounter[3] = (char) b+1;
+		memcpy (sup->cinit, salt, SALT_LENGTH);	// salt 
+		memcpy (&sup->cinit[SALT_LENGTH],sup->ccounter, 4);	// big-endian block number 
+		
+		cuda_hmac_ripemd160 (pwd, pwd_len, sup->cinit, SALT_LENGTH + 4, sup->cj, sup);
+		memcpy (u, sup->cj, RIPEMD160_DIGESTSIZE);
+		
+		//remaining iterations 
+		for (c = 1; c < ITERATIONS; c++)
+		{
+			cuda_hmac_ripemd160 (pwd, pwd_len, sup->cj, RIPEMD160_DIGESTSIZE, sup->ck,sup);
+			for (i = 0; i < RIPEMD160_DIGESTSIZE; i++)
+			{
+				u[i] ^= sup->ck[i];
+				sup->cj[i] = sup->ck[i];
+			}
+		}
+	}
+}

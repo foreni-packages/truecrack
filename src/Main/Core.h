@@ -19,9 +19,15 @@
 #ifndef HEADER_CORE
 #define HEADER_CORE
 
+#define SOFTWARE	"TrueCrack"
+#define VERSION		"2.5"
+#define WEBSITE		"http://code.google.com/p/truecrack"
+#define AUTHOR		"Luca Vaccaro"
+#define EMAIL		"infotruecrack@gmail.com"
+#define MESSAGE 	"Bruteforce password cracker for Truecrypt volume. Optimazed with Nvidia Cuda technology.\nBased on TrueCrypt, freely available at http://www.truecrypt.org/\nCopyright (c) 2011 by Luca Vaccaro."
+
+
 #define BLOCK_SIZE 	1024
-
-
 
 /* Type of supported bruteforce. */
 enum {
@@ -31,10 +37,10 @@ enum {
 
 int CORE_typeAttack;
 int CORE_verbose;
-const char *CORE_volumePath;
-const char *CORE_wordsPath;
-const char *CORE_charset;
-int CORE_charsetmaxlength;
+char *CORE_volumePath;
+char *CORE_wordsPath;
+unsigned char *CORE_charset;
+int CORE_maxlength;
 int CORE_blocksize;
 
 void core(void);

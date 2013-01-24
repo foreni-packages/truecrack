@@ -55,8 +55,10 @@ struct supportPkcs5_t {
 typedef struct supportPkcs5_t SupportPkcs5;
 
 
-void cuda_hmac_ripemd160 (unsigned char *key, int keylen, unsigned char *input, int len, unsigned char *digest, SupportPkcs5 *sup);
-void cuda_Pbkdf2 ( unsigned char *salt, unsigned char *blockPwd, int *blockPwd_init, int *blockPwd_length, unsigned char *headerkey, int numData, int numBlock) ;
+__device__ void cuda_hmac_ripemd160 (unsigned char *key, int keylen, unsigned char *input, int len, unsigned char *digest, SupportPkcs5 *sup);
+__device__ void cuda_Pbkdf2 ( unsigned char *salt, unsigned char *blockPwd, int *blockPwd_init, int *blockPwd_length, unsigned char *headerkey, int numData, int n) ;
+
+__device__ void cuda_Pbkdf2_charset_ ( unsigned char *salt, unsigned char *pwd, int pwd_len, unsigned char *headerkey) ;
 
 
 #if defined(__cplusplus)
