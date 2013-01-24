@@ -21,9 +21,9 @@
 
 #include <stdio.h>
 
+#define MAXWORDSIZE	64
 
-
-FILE *file_open (char *wordPath);
+FILE *file_open ( char *wordPath);
 int file_close (FILE *fp);
 int file_readWordsBlock (FILE *fp, int block_size, char *words, int *words_init, int *words_length);
 int file_readHeader(char *volumePath, char *header);
@@ -40,5 +40,6 @@ int decryptHeader(char *encryptedHeader, char *headerKey, int headerKey_length, 
 #ifndef _GPU_
 void find_key_and_decrypt(int blocksize, unsigned char *encryptedHeader, unsigned char *blockPwd, int *blockPwd_init, int *blockPwd_length, int *result); 
 #endif
+
 
 #endif

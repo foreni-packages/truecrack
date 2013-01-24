@@ -33,11 +33,13 @@ extern "C"
 
 
 int getMultiprocessorCount (void);
-void cuda_Kernel ( unsigned char *salt, unsigned char *header, unsigned char *blockPwd, int *blockPwd_init, int *blockPwd_length, short int *result);
 void cuda_Init (int block_maxsize, unsigned char *salt, unsigned char *header);
 void cuda_Set (	int block_currentsize, unsigned char *blockPwd, int *blockPwd_init, int *blockPwd_length, short int *result);
 void cuda_Free(void);
-void cuda_Core ( short int *result);
+void cuda_Core ( int block_currentsize, unsigned char *blockPwd, int *blockPwd_init, int *blockPwd_length, short int *result);
+void cuda_Core_dictionary ( int block_currentsize, unsigned char *blockPwd, int *blockPwd_init, int *blockPwd_length, short int *result);
+
+void cuda_Core_charset ( unsigned short int charset_length, unsigned char *charset, unsigned short int password_length, short int *result) ;
 #if defined(__cplusplus)
 }
 #endif
