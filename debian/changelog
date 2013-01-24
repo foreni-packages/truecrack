@@ -1,3 +1,9 @@
+truecrack (2.5-1kali0) kali; urgency=low
+
+  * Upgrade to version 2.5
+
+ -- Devon Kearns <dookie@kali.org>  Thu, 24 Jan 2013 12:06:48 -0700
+
 truecrack (0.1-1kali0) kali; urgency=low
 
   * Initial release 
