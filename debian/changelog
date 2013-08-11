@@ -1,3 +1,9 @@
+truecrack (3.0-1kali0) kali; urgency=low
+
+  * Upstream Import
+
+ -- Mati Aharoni <muts@kali.org>  Sun, 11 Aug 2013 14:46:35 -0400
+
 truecrack (2.5-1kali0) kali; urgency=low
 
   * Upgrade to version 2.5
